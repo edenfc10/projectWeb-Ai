@@ -1,17 +1,26 @@
 require('dotenv').config(); // טוען משתני סביבה מקובץ .env
+const fs = require('fs');
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const admin = require('firebase-admin');
 
-// הגדרת Firebase Admin SDK
-const serviceAccount = require('./project-web-ai-790a3-firebase-adminsdk-fbsvc-cb2f8598f7.json');
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-});
-const db = admin.firestore();
-const auth = admin.auth();
+// הגדרת Firebase Admin SDK אם קובץ האישורים קיים
+let db = null;
+let auth = null;
+const serviceAccountPath = path.join(__dirname, 'project-web-ai-790a3-firebase-adminsdk-fbsvc-cb2f8598f7.json');
+if (fs.existsSync(serviceAccountPath)) {
+    const serviceAccount = require(serviceAccountPath);
+    admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount)
+    });
+    db = admin.firestore();
+    auth = admin.auth();
+} else {
+    console.warn('Firebase service account JSON not found; auth and click-history features are disabled.');
+}
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -38,8 +47,8 @@ app.post('/api/recommendation', async (req, res) => {
     const { gender, age, height, style, event, weather, language = 'he' } = req.body;
     let clickHistory = 'אין נתונים';
 
-    // אימות המשתמש (אם יש טוקן)
-    if (req.headers.authorization) {
+    // אימות המשתמש (אם יש טוקן) רק אם Firebase הוגדר בהצלחה
+    if (auth && db && req.headers.authorization) {
         try {
             const idToken = req.headers.authorization.split('Bearer ')[1];
             const decodedToken = await auth.verifyIdToken(idToken);
@@ -103,7 +112,7 @@ app.post('/api/recommendation', async (req, res) => {
     `;
 
     try {
-        const model = genAI.getGenerativeModel({ model: "models/gemini-1.5-pro-latest" });
+        const model = genAI.getGenerativeModel({ model: process.env.GEMINI_MODEL || "models/gemini-flash-latest" });
         const result = await model.generateContent(prompt);
         const response = await result.response;
         const recommendationText = response.text();
