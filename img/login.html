@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="התחבר או הירשם ל-Eden2etc לקבלת המלצות סטייל מותאמות אישית עם AI" />
+  <title>התחברות והרשמה - Eden2etc</title>
+  <link
+    rel="stylesheet"
+    href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+    crossorigin="anonymous"
+  />
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- טעינת קובץ הסקריפט עם Firebase טעון בו -->
+  <script type="module" src="script.js"></script>
+</head>
+<body>
+  <!-- Language Switch -->
+  <div class="language-switch">
+    <select id="language-switch" aria-label="בחירת שפה">
+      <option value="he">עברית</option>
+      <option value="en">English</option>
+    </select>
+  </div>
+
+  <!-- Header Section -->
+  <section id="header">
+    <a href="index.html"><img src="img770/logo.png" class="logo" alt="Eden2etc Logo" /></a>
+    <div>
+      <ul id="navbar">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a class="active" id="loginLink">Login</a></li>
+        <li><a id="logoutLink" style="display: none;">Logout</a></li>
+        <li><a href="cart.html"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Login Section -->
+  <section id="login-section" class="section-p1">
+    <div class="auth-container">
+      <h2>התחברות</h2>
+      <form id="loginForm">
+        <label for="login-email">אימייל:</label>
+        <input type="email" id="login-email" name="login-email" placeholder="הכנס אימייל" required />
+        <label for="login-password">סיסמה:</label>
+        <input type="password" id="login-password" name="login-password" placeholder="הכנס סיסמה" required />
+        <button type="submit" class="btn">התחבר</button>
+      </form>
+      <p>אין לך חשבון? <a href="#" id="showRegisterLink">הירשם כאן</a></p>
+    </div>
+    </div>
+  </section>
+
+  <!-- Register Section -->
+  <section id="register-section" class="section-p1" style="display: none;">
+    <div class="auth-container">
+      <h2>הרשמה</h2>
+      <form id="registerForm">
+        <label for="register-email">אימייל:</label>
+        <input type="email" id="register-email" name="register-email" placeholder="הכנס אימייל" required />
+        <label for="register-password">סיסמה:</label>
+        <input type="password" id="register-password" name="register-password" placeholder="בחר סיסמה" required />
+        <button type="submit" class="btn">הירשם</button>
+      </form>
+      <p>כבר יש לך חשבון? <a href="#" id="showLoginLink">התחבר כאן</a></p>
+    </div>
+    </div>
+  </section>
+</body>
+</html>

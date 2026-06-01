@@ -1,0 +1,220 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fit For You</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section id="header">
+        <a href="#"><img src="img770/logo.png" class="logo" alt=""></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></il>
+                <li><a href="shop.html">Shop</a></il>
+                <li><a href="blog.html">Blog</a></il>
+                <li><a href="about.html">About</a></il>
+                 <li><a href="contact.html">Contact</a></il>
+                    <li id="lg-bag"><a class="active" href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+                </ul>
+        </div>
+        
+    
+    </section>
+    <section id="page-header" class="about-header">
+        <h2>#let's_talk</h2>
+        <p>LEAVE A MESSAGE,We love hear from you!</p>
+    </section>
+    <section id="cart" class="section-p1">
+        <table width="100%">
+            <thead>
+                <tr>
+                    <td>Remove</td>
+                    <td>Image</td>
+                    <td>Product</td>
+                    <td>Price</td>
+                    <td>Quantity</td>
+                    <td>Subtotal</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="#"><i class="far fa-times-circle"></i></a></td>
+                    <td><img src="img770/products/f1.jpg" alt=""></td>
+                    <td>Cartoon Astronaut</td>
+                    <td>$77.0</td>
+                    <td><input type="number" value="1"></td>
+                    <td>$77.0</td>
+                </tr>
+                <tr>
+                    <td><a href="#"><i class="far fa-times-circle"></i></a></td>
+                    <td><img src="img770/products/f2.jpg" alt=""></td>
+                    <td>Cartoon Astronaut</td>
+                    <td>$77.0</td>
+                    <td><input type="number" value="1"></td>
+                    <td>$77.0</td>
+                </tr>
+                <tr>
+                    <td><a href="#"><i class="far fa-times-circle"></i></a></td>
+                    <td><img src="img770/products/f3.jpg" alt=""></td>
+                    <td>Cartoon Astronaut</td>
+                    <td>$77.0</td>
+                    <td><input type="number" value="1"></td>
+                    <td>$77.0</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </section>
+    <section id="cart-add" class="section-p1">
+        <div id="coupon">
+            <h3>Apply Coupon</h3>
+            <div>
+                <input type="text" placeholder="Enter Your Coupon">
+                <button class="normal">Apply </button>
+            </div>
+        </div>
+        <div id="subtotal">
+            <h3>Cart Totals</h3>
+            <table>
+                <tr>
+                    <td>Cart Subtotal</td>
+                    <td>Free</td>
+                </tr>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td><strong>$ 335</strong></td>
+                </tr>
+            </table>
+            <button class="normal">Proceed to checkout</button>
+        </div>
+    </section>
+
+
+<footer class="section-p1">
+    <div class="col">
+        <img class="logo" src="img770/logo.png" alt="">
+        <h4>Contact</h4>
+        <p><strong>Address:</strong>562 Ben Gurion, Street 770 ,Tel Aviv</p>
+        <p><strong>Phone:</strong>+972534461318/+972558675770</p>
+        <p><strong>Hours:</strong>10:00 - 18:00, Sun-Fri</p>
+        <div class="follow">
+            <h4>follow us</h4>
+            <div class="icon">
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-pinterest"></i>
+            <i class="fab fa-youtube"></i>
+        </div>
+    </div>
+</div>
+<div class="col">
+    <h4>About</h4>
+    <a href="#">About us</a>
+    <a href="#">Delivery Information</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms & Conditions</a>
+    <a href="#">Contact Us</a>
+</div>
+<div class="col">
+    <h4>My Account</h4>
+    <a href="#">Sign In</a>
+    <a href="#">View Cart</a>
+    <a href="#">My Wishlist</a>
+    <a href="#">Track My Order</a>
+    <a href="#">Help</a>
+</div>
+<div class="col install">
+    <h4>Install App</h4>
+    <p>From App Store or Google Play</p>
+    <div class="row">
+        <img src="img770/pay/app.jpg" alt="">
+        <img src="img770/pay/play.jpg" alt="">
+    </div>
+    <p>Secured Payment Gateways</p>
+    <img src="img770/pay/pay.png" alt="">
+</div>
+<div class="copyright">
+    <p>Fit For You</p>
+</div>
+</footer>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const tbody = document.querySelector("#cart tbody");
+  const subtotalCell = document.querySelector("#subtotal table tr:last-child td:last-child");
+
+  let total = 0;
+  const isVIP = localStorage.getItem("isVIP") === "true"; // קח מה־login אם יש לך
+
+  tbody.innerHTML = '';
+
+  cart.forEach(product => {
+    const productTotal = product.price * product.quantity;
+    total += productTotal;
+
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td><a href="#" class="remove-item" data-name="${product.name}"><i class="far fa-times-circle"></i></a></td>
+      <td><img src="${product.image}" alt="" /></td>
+      <td>${product.name}</td>
+      <td>$${product.price.toFixed(2)}</td>
+      <td><input type="number" value="${product.quantity}" min="1" class="qty-input" data-name="${product.name}" /></td>
+      <td>$${productTotal.toFixed(2)}</td>
+    `;
+    tbody.appendChild(row);
+  });
+
+  if (isVIP) {
+    total *= 0.85; // 15% הנחה
+  }
+
+  subtotalCell.innerText = `$${total.toFixed(2)}`;
+
+  // שינוי כמות
+  document.querySelectorAll(".qty-input").forEach(input => {
+    input.addEventListener("change", e => {
+      const name = e.target.dataset.name;
+      const newQty = parseInt(e.target.value);
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const item = cart.find(p => p.name === name);
+      if (item) {
+        item.quantity = newQty;
+        localStorage.setItem("cart", JSON.stringify(cart));
+        location.reload(); // רענון להצגת הסכום החדש
+      }
+    });
+  });
+
+  // הסרת מוצר
+  document.querySelectorAll(".remove-item").forEach(link => {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      const name = link.dataset.name;
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart = cart.filter(p => p.name !== name);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      location.reload();
+    });
+  });
+});
+</script>
+
+
+
+
+
+<script src="script.js"></script>
+    
+</body>
+</html>
+
+
+
+
+
+ 

@@ -1,0 +1,22 @@
+{
+  "folders": [
+	{
+		"path": "."
+	},
+	{
+		"path": "../img"
+	},
+	{
+		"path": "../‏‏img - עותק"
+	}
+],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "img"
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+    
+    ]
+  }
+}
